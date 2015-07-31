@@ -1,0 +1,31 @@
+<div id="myElement">Loading the player...</div>
+
+<script type="text/javascript">
+var playerInstance = jwplayer("myElement");
+playerInstance.setup({
+    file: "http://bob.jwplayer.com/~test/assets/MediumVideo.mp4",
+    image: "http://bob.jwplayer.com/~test/assets/MediumImage.jpg",
+    width: 640,
+    height: 360,
+    title: 'Basic Video Embed',
+    description: 'A video with a basic title and description!'
+});
+
+playerInstance.on('complete', function(event){
+  alert("Thanks for watching!");
+});
+
+playerInstance.on('time', function(event){
+  if(event.position >= 5){
+    playerInstance.pause();
+    $("img").attr('src', 'http://bob.jwplayer.com/~test/assets/HardImage2.jpg');
+  }
+})
+</script>
+
+<a onclick='playerInstance.load()'>Load Video</a>
+<a onclick='playerInstance.play()'>Play Video</a>
+
+<div>
+  <img src="http://bob.jwplayer.com/~test/assets/HardImage1.jpg" />
+</div>
