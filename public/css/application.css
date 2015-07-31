@@ -1,0 +1,8 @@
+a {
+  text-decoration: underline;
+  color: blue;
+}
+
+a:hover{
+  cursor: pointer;
+}
