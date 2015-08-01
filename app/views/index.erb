@@ -13,11 +13,18 @@ playerInstance.setup({
     description: 'A video with a basic title and description!',
     advertising: {
       client: 'vast',
-      tag: tag
+      schedule: {
+        adbreak1: {
+          offset: "pre",
+          tag: tag
+        },
+        adbreak2: {
+          offset: 10,
+          tag: tag,
+          type: 'nonlinear'
+        }
+      }
     }
-});
-playerInstance.on('beforePlay', function(event){
-  playerInstance.playAd(tag);
 });
 
 playerInstance.on('complete', function(event){
@@ -25,18 +32,16 @@ playerInstance.on('complete', function(event){
 });
 
 playerInstance.on('time', function(event){
-  if(event.position >= 5){
+  if(Math.round(event.position) == 5){
     playerInstance.pause();
     $("img").attr('src', 'http://bob.jwplayer.com/~test/assets/HardImage2.jpg');
+    playerInstance.play();
   }
 });
 
-playerInstance.on('time', function(event){
-  if(event.position >= 10){
-    playerInstance.playAd(tag)
-  }
+playerInstance.on("adImpression",function(event){
+  alert("The ad impression was fired.");
 });
-
 </script>
 
 <a onclick='playerInstance.load()'>Load Video</a>
